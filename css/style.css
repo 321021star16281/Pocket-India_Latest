@@ -1,0 +1,274 @@
+:root{
+  --bg: #faf9f7;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #d97706; /* warm saffron-ish accent */
+  --accent-2: #0ea5a4; /* teal */
+  --text: #0f172a;
+  --radius: 10px;
+  --max-width: 1100px;
+  --gap: 1rem;
+  --shadow: 0 6px 18px rgba(15,23,42,0.08);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  padding:2rem 1rem;
+}
+
+.site-wrap{
+  max-width:var(--max-width);
+  margin:0 auto;
+}
+
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:1.25rem;
+}
+header h1{font-size:1.5rem;margin:0;color:var(--accent-2)}
+header nav a{color:var(--muted);text-decoration:none;font-weight:600}
+header nav a:hover{color:var(--text)}
+
+main{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:1.25rem;
+}
+
+section{
+  background:var(--card);
+  padding:1.25rem;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+section h2{margin-top:0;color:var(--accent)}
+section p{color:var(--text);margin:.5rem 0}
+
+ul{padding-left:1.25rem;margin:.5rem 0}
+li{margin:.35rem 0}
+
+.map-wrap{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  border-radius:8px;
+  background:linear-gradient(180deg, #e6f7f6, #f8fbfa);
+}
+
+/* Responsive embedded iframe that keeps aspect ratio */
+.map-wrap::before{
+  content:'';display:block;padding-top:56.25%; /*16:9*/
+}
+.map-wrap iframe{
+  position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:8px;
+}
+
+.travel-tips ul{list-style:disc;padding-left:1.25rem}
+
+footer{
+  margin-top:1.5rem;
+  text-align:center;color:var(--muted);font-size:.9rem;
+}
+
+/* Layout for larger screens */
+@media(min-width:900px){
+  main{grid-template-columns: 2fr 1fr;align-items:start}
+  section.full{grid-column:1/-1}
+}
+
+/* A small utility grid for attractions */
+.attractions-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.75rem;
+}
+@media(min-width:640px){.attractions-grid{grid-template-columns:1fr 1fr}}
+
+/* Card style for list items to improve legibility */
+.attractions-grid li{background:linear-gradient(180deg, #fff,#fbfbfb);padding:.6rem;border-radius:8px;border:1px solid rgba(15,23,42,0.03)}
+
+/* Accessibility and focus styles */
+a:focus,button:focus,input:focus,iframe:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, transparent);outline-offset:2px}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#071124;--card:#071827;--muted:#9aa7b2;--text:#e6eef6;--accent:#f59e0b;--accent-2:#2dd4bf;--shadow: 0 6px 20px rgba(2,6,23,0.6)}
+  body{background:linear-gradient(180deg,#041424,#071124)}
+  header h1{color:var(--accent-2)}
+}
+
+/* Print friendliness */
+@media print{
+  body{padding:0;color:#000;background:#fff}
+  header nav, footer{display:none}
+  section{box-shadow:none;border-radius:0;padding:.5rem}
+}
+
+/* Small helpers */
+.muted{color:var(--muted)}
+.accent{color:var(--accent)}
+
+/* Make sure embedded maps do not trap keyboard focus unexpectedly
+  Note: tabindex is an HTML attribute and cannot be set from CSS.
+  To remove iframe from keyboard order, set tabindex="-1" on the iframe element in the HTML.
+*/
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:.55rem .9rem;
+  border-radius:8px;
+  background:var(--accent);
+  color: #746dcc;
+  text-decoration:none;
+  font-weight:700;
+  border:0;
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .15s ease, background .12s ease, opacity .12s ease;
+  box-shadow: 0 6px 14px rgba(15,23,42,0.08);
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(15,23,42,0.12)}
+.btn:active{transform:translateY(-1px);}
+.btn:focus{outline:3px solid color-mix(in srgb, var(--accent) 28%, transparent);outline-offset:3px}
+
+.btn-outline{
+  background:transparent;
+  color:var(--accent);
+  border:2px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  padding:.5rem .85rem;
+}
+.btn-secondary{background:var(--accent-2);color:rgb(232, 235, 143)}
+
+/* Hero and homepage helpers */
+.hero{
+  background: linear-gradient(135deg, rgba(14,165,164,0.08), rgba(217,119,6,0.06));
+  padding:2rem;
+  border-radius:12px;
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  justify-content:space-between;
+}
+.hero h1{font-size:2rem;margin:0}
+.hero p{margin:0;color:var(--muted)}
+
+.search-row{display:flex;gap:.75rem;align-items:center}
+.search-input{padding:.6rem .8rem;border-radius:10px;border:1px solid rgba(15,23,42,0.06);min-width:220px}
+.search-input:focus{border-color:var(--accent-2);box-shadow:0 6px 18px rgba(14,165,164,0.06)}
+
+.states-grid{
+  display:grid;
+  grid-template-columns:repeat(1,1fr);
+  gap:.8rem;
+  margin-top:1rem;
+}
+@media(min-width:640px){.states-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.states-grid{grid-template-columns:repeat(4,1fr)}}
+
+.state-card{background:linear-gradient(180deg,#be8e8e,#a77272);padding:1rem;border-radius:10px;border:1px solid rgba(15,23,42,0.04);display:flex;align-items:center;justify-content:space-between}
+.state-card a{color:var(--text);text-decoration:none;font-weight:600}
+
+/* small helper for page header nav on homepage */
+.main-nav{display:flex;gap:1rem;align-items:center}
+
+/* Attractions list styling */
+.attractions-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+@media (min-width: 640px) {
+  .attractions-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.attraction-item {
+  background: var(--card);
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.attraction-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.attraction-item h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--accent-2);
+  font-size: 1.1rem;
+}
+
+.attraction-item p {
+  margin: 0 0 1rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.map-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.map-button:hover {
+  background: color-mix(in srgb, var(--accent) 90%, white);
+  transform: translateY(-1px);
+}
+
+.map-button:active {
+  transform: translateY(0);
+}
+
+.map-button::after {
+  content: "→";
+  font-size: 1.1em;
+  transition: transform 0.2s ease;
+}
+
+.map-button:hover::after {
+  transform: translateX(3px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .attraction-item {
+    border-color: rgba(255,255,255,0.1);
+  }
+  
+  .map-button {
+    background: var(--accent-2);
+  }
+  
+  .map-button:hover {
+    background: color-mix(in srgb, var(--accent-2) 90%, white);
+  }
+}
+
